@@ -7,9 +7,9 @@
 # Set package-wide seed for reproducibility
 set.seed(2794)
 
-#' Simulate and Analyze ROC Data
+#' Simulate and Analyze single group ROC/AUC Data
 #'
-#' This function simulates ROC data, performs multiple simulations if required, and computes confidence intervals for AUC along with power estimates.
+#' This function simulates single group ROC/AUC data, performs multiple simulations if required, and computes confidence intervals for AUC along with power estimates.
 #'
 #' @param mean_signal Mean of the signal distribution.
 #' @param mean_noise Mean of the noise distribution.

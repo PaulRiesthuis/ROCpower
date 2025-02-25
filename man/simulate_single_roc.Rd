@@ -12,7 +12,7 @@ simulate_single_roc(
   n_g = 100,
   n_studied = 5,
   n_new = 5,
-  n_simulations = 1,
+  n_simulations = 1000,
   SESOI = 0.55,
   seed = 2794
 )
@@ -45,5 +45,5 @@ If \code{n_simulations == 1}, returns a single ROC object. If \code{n_simulation
 This package provides functions for simulating signal detection data,
 computing ROC curves, and performing power analyses.
 
-This function simulates ROC data, performs multiple simulations if required, and computes confidence intervals for AUC along with power estimates.
+This function simulates single group ROC/AUC data, performs multiple simulations if required, and computes confidence intervals for AUC along with power estimates.
 }

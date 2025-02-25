@@ -1,10 +1,10 @@
-#' Simulate and Analyze ROC Data for Two Groups
-#' @name simulate_two_roc
+#' Simulate and Analyze partial ROC/AUC for Two Groups
+#' @name simulate_two_partial_roc
 
 # Set package-wide seed for reproducibility
 set.seed(2794)
 
-#' This function simulates ROC data for two groups, performs multiple simulations if required,
+#' This function simulates partial ROC/AUC data for two groups, performs multiple simulations if required,
 #' calculates AUC confidence intervals, and conducts statistical tests on AUC differences.
 #'
 #' @param mean_signal_g1 Mean of the signal distribution for Group 1.
@@ -23,16 +23,18 @@ set.seed(2794)
 #' @param SESOI Smallest effect size of interest for power calculations.
 #' @param paired Logical; whether to simulate paired data.
 #' @param rho Correlation between repeated measures in the paired case.
+#' @param pauc Partial area under the curve of interest
 #' @param seed Random seed for reproducibility.
 #' @import pROC MASS
 #' @return A power analysis data frame summarizing results across simulations.
 #' @export
-simulate_two_roc <- function(mean_signal_g1 = 1, mean_signal_g2 = 0.58,
+simulate_two_partial_roc <- function(mean_signal_g1 = 1, mean_signal_g2 = 0.58,
                              mean_noise_g1 = 0, mean_noise_g2 = 0,
                              sd_signal_g1 = 1, sd_signal_g2 = 1,
                              sd_noise_g1 = 1, sd_noise_g2 = 1,
                              n_g1 = 100, n_g2 = 100,
                              n_studied = 5, n_new = 5,
+                             pauc = c(.65,.33),
                              n_simulations = 1000, SESOI = 0.05,
                              paired = FALSE, rho = 0.5, seed = 2794) {
 
@@ -78,8 +80,8 @@ simulate_two_roc <- function(mean_signal_g1 = 1, mean_signal_g2 = 0.58,
     ratings_g1 <- as.numeric(cut(ratings_g1, breaks = cutoffs_g1, labels = 1:6, include.lowest = TRUE))
     ratings_g2 <- as.numeric(cut(ratings_g2, breaks = cutoffs_g2, labels = 1:6, include.lowest = TRUE))
 
-    roc_g1 <- pROC::roc(labels, ratings_g1, direction = "<")
-    roc_g2 <- pROC::roc(labels, ratings_g2, direction = "<")
+    roc_g1 <- pROC::roc(labels, ratings_g1, direction = "<", partial.auc = pauc)
+    roc_g2 <- pROC::roc(labels, ratings_g2, direction = "<", partial.auc = pauc)
 
     return(list(roc_g1 = roc_g1, roc_g2 = roc_g2))
   }
@@ -192,8 +194,9 @@ Based on a simulation-based power analysis (Riesthuis et al., 2025), using the f
 
 #### **Study Parameters**
 - SESOI: {SESOI}
-- Sample Size (n): {n_g1}
+- pAUC: {pauc}
 - paired = {paired}
+- Sample Size (n): {n_g1}
 - Number of Studied Items: {n_studied}
 - Number of New Items: {n_new}
 - Correlation: {rho}

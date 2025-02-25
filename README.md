@@ -1,24 +1,14 @@
----
-output: github_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
 
 # ROCpower
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of ROCpower is to examine the sample sizes required to conduct the NHST, Minimum-effect tests, and equivalence tests for Receiver Operating Characteristic curves
+The goal of ROCpower is to examine the sample sizes required to conduct
+the NHST, Minimum-effect tests, and equivalence tests for Receiver
+Operating Characteristic curves
 
 ## Installation
 
@@ -31,7 +21,8 @@ install_github("PaulRiesthuis/ROCpower")
 ## Example single ROC curve
 
 To run a power analsysis for a single ROC curve
-```{r}
+
+``` r
 library(ROCpower)
 ## basic example code. Adjust the means and sds to get the ROC/AUC of interest.
 simulate_single_roc <- function(mean_signal = 0.34, mean_noise = 0,
@@ -41,10 +32,11 @@ simulate_single_roc <- function(mean_signal = 0.34, mean_noise = 0,
 simulate_single_roc
 ```
 
-## Example power analysis for difference between ROC curves 
+## Example power analysis for difference between ROC curves
 
-To run a power analysis for difference between ROC curves 
-```{r}
+To run a power analysis for difference between ROC curves
+
+``` r
 library(ROCpower)
 ## basic example code. Adjust the means, sds, sample sizes for each group, and the correlation to get the ROC/AUC of interest.
 simulate_two_roc <- function(mean_signal_g1 = 1, mean_signal_g2 = 0.58,

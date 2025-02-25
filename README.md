@@ -28,7 +28,7 @@ library(ROCpower)
 simulate_single_roc <- function(mean_signal = 0.34, mean_noise = 0,
                                 sd_signal = 1, sd_noise = 1,
                                 n_g = 100, n_studied = 5, n_new = 5,
-                                n_simulations = 1, SESOI = 0.55, seed = 2794)
+                                n_simulations = 1000, SESOI = 0.55, seed = 2794)
 simulate_single_roc
 ```
 

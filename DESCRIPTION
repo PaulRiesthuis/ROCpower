@@ -1,0 +1,19 @@
+Package: ROCpower
+Title: Statistical Power Analysis for ROC Curves
+Version: 0.0.0.9000
+Authors@R: 
+    person("Paul", "Riesthuis", , "paul.riesthuis@kuleuven.be", role = c("aut", "cre"))
+Description: A package for simulating ROC curves, computing AUC values, and performing statistical power analysis.
+License: MIT
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports: 
+    knitr,
+    MASS,
+    pROC,
+    rempsyc,
+    glue
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

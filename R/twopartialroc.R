@@ -23,7 +23,7 @@ set.seed(2794)
 #' @param SESOI Smallest effect size of interest for power calculations.
 #' @param paired Logical; whether to simulate paired data.
 #' @param rho Correlation between repeated measures in the paired case.
-#' @param pauc Partial area under the curve of interest
+#' @param pauc Partial area under the curve of interest.
 #' @param seed Random seed for reproducibility.
 #' @import pROC MASS
 #' @return A power analysis data frame summarizing results across simulations.
@@ -162,7 +162,7 @@ simulate_two_partial_roc <- function(mean_signal_g1 = 1, mean_signal_g2 = 0.58,
   }
 
   # Run roc.test on all 1000 simulations
-  results <- perform_roc_tests(roc_g1_list, roc_g2_list)
+  results <- suppressWarnings(perform_roc_tests(roc_g1_list, roc_g2_list))
   # Power table
   power_table <- data.frame(
     "NHST" = mean(results$Diff_conf_low95 > 0 | results$Diff_conf_high95 < 0, na.rm=T),
@@ -194,7 +194,7 @@ Based on a simulation-based power analysis (Riesthuis et al., 2025), using the f
 
 #### **Study Parameters**
 - SESOI: {SESOI}
-- pAUC: {pauc}
+- pAUC: ({paste(pauc, collapse=' - ')})
 - paired = {paired}
 - Sample Size (n): {n_g1}
 - Number of Studied Items: {n_studied}

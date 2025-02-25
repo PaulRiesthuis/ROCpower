@@ -50,7 +50,7 @@ simulate_two_partial_roc(
 
 \item{n_new}{Number of new items per participant.}
 
-\item{pauc}{Partial area under the curve of interest}
+\item{pauc}{Partial area under the curve of interest.}
 
 \item{n_simulations}{Number of simulations.}
 

@@ -160,7 +160,7 @@ simulate_two_roc <- function(mean_signal_g1 = 1, mean_signal_g2 = 0.58,
   }
 
   # Run roc.test on all 1000 simulations
-  results <- perform_roc_tests(roc_g1_list, roc_g2_list)
+  results <- suppressWarnings(perform_roc_tests(roc_g1_list, roc_g2_list))
   # Power table
   power_table <- data.frame(
     "NHST" = mean(results$Diff_conf_low95 > 0 | results$Diff_conf_high95 < 0, na.rm=T),

@@ -118,7 +118,7 @@ simulate_two_partial_roc <- function(mean_signal_g1 = 1, mean_signal_g2 = 0.58,
     # Perform roc.test and calculate CIs for each dataset
     for (i in 1:n_simulations) {
       # Perform roc.test for each simulation
-      test_result <- suppressWarnings(roc.test(roc_g1_list[[i]], roc_g2_list[[i]], paired = paired))
+      test_result <- roc.test(roc_g1_list[[i]], roc_g2_list[[i]], paired = paired)
       p_values[i] <- test_result$p.value
 
       # Confidence intervals for each group
@@ -205,7 +205,6 @@ Based on a simulation-based power analysis (Riesthuis et al., 2025), using the f
 - Number of Simulations: {n_simulations}
 - Set Seed: {seed}
 ")
-
 
   return(summary = cat(summary_text))
 }

@@ -3,6 +3,8 @@
 export(simulate_single_roc)
 export(simulate_two_partial_roc)
 export(simulate_two_roc)
+export(visualize_roc)
 import(MASS)
+import(ggplot2)
 import(glue)
 import(pROC)

@@ -54,7 +54,7 @@ set.seed(seed)
     cutoffs_g <- quantile(ratings_g, probs = seq(0, 1, length.out = 7))
     ratings_g <- cut(ratings_g, breaks = cutoffs_g, labels = 1:6, include.lowest = TRUE)
 
-    roc_g <- pROC::roc(labels_g, as.numeric(ratings_g))
+    roc_g <- pROC::roc(labels_g, as.numeric(ratings_g),quiet = TRUE)
     return(roc_g)
   }
 

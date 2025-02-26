@@ -104,8 +104,8 @@ simulate_two_partial_roc <- function(mean_signal_g1 = 1, mean_signal_g2 = 0.58,
     ratings_g1 <- as.numeric(cut(ratings_g1, breaks = cutoffs_g1, labels = 1:6, include.lowest = TRUE))
     ratings_g2 <- as.numeric(cut(ratings_g2, breaks = cutoffs_g2, labels = 1:6, include.lowest = TRUE))
 
-    roc_g1 <- pROC::roc(labels, ratings_g1, direction = "<", partial.auc = pauc)
-    roc_g2 <- pROC::roc(labels, ratings_g2, direction = "<", partial.auc = pauc)
+    roc_g1 <- pROC::roc(labels, ratings_g1, direction = "<", partial.auc = pauc, quiet = TRUE)
+    roc_g2 <- pROC::roc(labels, ratings_g2, direction = "<", partial.auc = pauc, quiet = TRUE)
 
     return(list(roc_g1 = roc_g1, roc_g2 = roc_g2))
   }

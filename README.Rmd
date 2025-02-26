@@ -32,7 +32,7 @@ install_github("PaulRiesthuis/ROCpower")
 
 
 To visualize the full or partial ROC curves and AUCs for parameters of interest
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(ROCpower)
 # For single curve, use group1 parameters.
 # Visualize full ROC curves and AUCs. n_g1 is intentionally large to have precise estimates. rho doesnt affect the AUC.
@@ -57,7 +57,7 @@ visualize_partial_roc(mean_signal_g1 = 1, mean_signal_g2 = 0.58,
 
 
 To run a power analsysis for a single ROC curve
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(ROCpower)
 ## basic example code. Adjust the means and sds to get the ROC/AUC of interest.
 simulate_single_roc(mean_signal = 0.34, mean_noise = 0,
@@ -69,7 +69,7 @@ simulate_single_roc(mean_signal = 0.34, mean_noise = 0,
 ## Example power analysis for difference between full ROC curves 
 
 To run a power analysis for difference between full ROC curves 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(ROCpower)
 ## basic example code. Adjust the means, sds, sample sizes for each group, and the correlation to get the ROC/AUC of interest.
 simulate_two_roc(mean_signal_g1 = 1, mean_signal_g2 = 0.58,
@@ -85,7 +85,7 @@ simulate_two_roc(mean_signal_g1 = 1, mean_signal_g2 = 0.58,
 ## Example power analysis for difference between partial ROC curves 
 
 To run a power analysis for difference between partial ROC curves 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(ROCpower)
 ## basic example code. Adjust the means, sds, sample sizes for each group, and the correlation to get the ROC/AUC of interest.
 simulate_two_partial_roc(mean_signal_g1 = 1, mean_signal_g2 = 0.58,

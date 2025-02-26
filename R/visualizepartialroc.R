@@ -1,7 +1,7 @@
-#' Simulate and Plot ROC Curves for Two Groups
+#' Simulate and Plot Partial ROC Curves for Two Groups
 #'
-#' This function simulates ROC data for two groups, generates confidence ratings,
-#' computes ROC curves, and returns their plots with AUC.
+#' This function simulates partial ROC data for two groups, generates confidence ratings,
+#' computes ROC curves, and returns the plots with their AUC.
 #'
 #' @param mean_signal_g1 Mean of the signal distribution for Group 1.
 #' @param mean_signal_g2 Mean of the signal distribution for Group 2.
@@ -27,25 +27,27 @@
 #' @export
 #'
 #' @examples
-#' # Get ROC curves and AUCs for default parameters
-#' result <- visualize_full_roc()
-#' # To get ROC curves and AUC for single group use group 1 statistics
+#' # Get partial ROC curves and AUCs for default parameters
+#' result <- visualize_partial_roc()
+#' # To get partial ROC curves and AUC for single group use group 1 statistics
 #'
-#' Visualize ROC curves and AUC for parameters of interest
-#' visualize_full_roc(mean_signal_g1 = 1, mean_signal_g2 = 0.58,
+#' Visualize partial ROC curves and AUC for parameters of interest
+#' visualize_partial_roc(mean_signal_g1 = 1, mean_signal_g2 = 0.58,
 #' n_studied = 5, n_new = 5,
 #' n_g1 = 10000, # Is high to get precise estimate of ROC curve and AUC
 #' sd_signal_g1 = 1, sd_signal_g2 = 1,
 #' sd_noise_g1 = 1, sd_noise_g2 = 1,
 #' mean_noise_g1 = 0, mean_noise_g2 = 0,
+#' pauc = c(.63,.50),
 #' rho = 0, seed = 2794)
-visualize_full_roc <- function(mean_signal_g1 = 1, mean_signal_g2 = 0.58,
-                                n_studied = 5, n_new = 5,
-                                n_g1 = 10000,
-                                sd_signal_g1 = 1, sd_signal_g2 = 1,
-                                sd_noise_g1 = 1, sd_noise_g2 = 1,
-                                mean_noise_g1 = 0, mean_noise_g2 = 0,
-                                rho = 0, seed = 2794) {
+visualize_partial_roc <- function(mean_signal_g1 = 1, mean_signal_g2 = 0.58,
+                               n_studied = 5, n_new = 5,
+                               n_g1 = 10000,
+                               sd_signal_g1 = 1, sd_signal_g2 = 1,
+                               sd_noise_g1 = 1, sd_noise_g2 = 1,
+                               mean_noise_g1 = 0, mean_noise_g2 = 0,
+                               pauc = c(.63,.50),
+                               rho = 0, seed = 2794) {
 
   set.seed(seed)
 
@@ -75,8 +77,8 @@ visualize_full_roc <- function(mean_signal_g1 = 1, mean_signal_g2 = 0.58,
   ratings_g2 <- as.numeric(cut(ratings_g2, breaks = cutoffs_g2, labels = 1:6, include.lowest = TRUE))
 
   # Compute ROC curves
-  roc_g1 <- pROC::roc(labels, ratings_g1, direction = "<")
-  roc_g2 <- pROC::roc(labels, ratings_g2, direction = "<")
+  roc_g1 <- pROC::roc(labels, ratings_g1, direction = "<", partial.auc = pauc)
+  roc_g2 <- pROC::roc(labels, ratings_g2, direction = "<", partial.auc = pauc)
 
 
   # Plot the ROC curve
@@ -88,7 +90,8 @@ visualize_full_roc <- function(mean_signal_g1 = 1, mean_signal_g2 = 0.58,
        print.auc = TRUE,
        print.auc.y = .40,
        xlab="False Positive Rate",
-       ylab="True Postive Rate")
+       ylab="True Postive Rate",
+       auc.polygon=TRUE)
   plot(roc_g2,
        col= "red",
        add=T,
@@ -96,7 +99,8 @@ visualize_full_roc <- function(mean_signal_g1 = 1, mean_signal_g2 = 0.58,
        print.auc = TRUE,
        print.auc.y = .30,
        xlab="False Positive Rate",
-       ylab="True Postive Rate")
+       ylab="True Postive Rate",
+       auc.polygon=TRUE)
   legend("bottomright", legend=c("Group1", "Group2"),
          col=c("Blue","red"), lwd=2)
 

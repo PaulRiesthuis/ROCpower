@@ -47,3 +47,15 @@ computing ROC curves, and performing power analyses.
 
 This function simulates single group ROC/AUC data, performs multiple simulations if required, and computes confidence intervals for AUC along with power estimates.
 }
+\examples{
+# Run a basic simulation with default parameters
+simulate_single_roc()
+
+# Run a simulation with a different signal mean
+simulate_single_roc(mean_signal = 1.2)
+# Run a simulation for parameters of interest
+simulate_single_roc(mean_signal = 0.34, mean_noise = 0,
+sd_signal = 1, sd_noise = 1,
+n_g = 100, n_studied = 5, n_new = 5,
+n_simulations = 1000, SESOI = 0.55, seed = 2794)
+}

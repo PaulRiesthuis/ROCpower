@@ -89,7 +89,9 @@ simulate_two_roc <- function(mean_signal_g1 = 1, mean_signal_g2 = 0.58,
 
     ratings_g1 <- c(signal_g1, noise_g1)
     ratings_g2 <- c(signal_g2, noise_g2)
-    labels <- c(rep(1, length(signal_g1)), rep(0, length(noise_g1)))
+    labels_g1 <- c(rep(1, length(signal_g1)), rep(0, length(noise_g1)))
+    labels_g2 <- c(rep(1, length(signal_g2)), rep(0, length(noise_g2)))
+
 
     # Define 6-point scale cutoffs
     cutoffs_g1 <- quantile(ratings_g1, probs = seq(0, 1, length.out = 7))
@@ -98,8 +100,8 @@ simulate_two_roc <- function(mean_signal_g1 = 1, mean_signal_g2 = 0.58,
     ratings_g1 <- as.numeric(cut(ratings_g1, breaks = cutoffs_g1, labels = 1:6, include.lowest = TRUE))
     ratings_g2 <- as.numeric(cut(ratings_g2, breaks = cutoffs_g2, labels = 1:6, include.lowest = TRUE))
 
-    roc_g1 <- pROC::roc(labels, ratings_g1, direction = "<", quiet = TRUE)
-    roc_g2 <- pROC::roc(labels, ratings_g2, direction = "<", quiet = TRUE)
+    roc_g1 <- pROC::roc(labels_g1, ratings_g1, direction = "<", quiet = TRUE)
+    roc_g2 <- pROC::roc(labels_g2, ratings_g2, direction = "<", quiet = TRUE)
 
     return(list(roc_g1 = roc_g1, roc_g2 = roc_g2))
   }
